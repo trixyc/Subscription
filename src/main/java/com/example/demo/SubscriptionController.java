@@ -37,12 +37,7 @@ public class SubscriptionController {
 	@RequestParam(name="startDate") String startDate,
 	@RequestParam(name="endDate") String endDate,
 	Model model) {
-		System.out.println("amount " + amount);
-		System.out.println("subType: "+subType);
-		System.out.println("week: "+week);
-		System.out.println("month: "+month);
-		System.out.println("startDate: "+startDate.toString());
-		System.out.println("endDate: "+endDate.toString());
+
 		Date sDate, eDate;
 		List<String> resultDates =  new ArrayList();
 		
@@ -61,7 +56,6 @@ public class SubscriptionController {
 					
 					do {
 			            // Loop to get every Sunday by adding Period.ofDays(7) the the current Sunday.
-			            System.out.println(day.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 			            resultDates.add(day.toString());
 			            day = day.plus(Period.ofDays(7));
 			        } while (day.isBefore(localEnd));
@@ -77,7 +71,6 @@ public class SubscriptionController {
 					
 					do {
 			            // Loop to get every Sunday by adding Period.ofDays(7) the the current Sunday.
-			            System.out.println(day.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL)));
 			            resultDates.add(day.toString());
 			            day = day.plus(Period.ofMonths(1));
 			        } while (day.isBefore(localEnd));
@@ -90,11 +83,9 @@ public class SubscriptionController {
 				model.addAttribute("sDate",sDate );
 				model.addAttribute("eDate",eDate );
 				model.addAttribute("resultDates",resultDates );
-System.out.println("===============================================================================================================================");
 			} catch (Exception e) {
 			    e.printStackTrace();
 		}
 		return "result";
 	}
-
 }
